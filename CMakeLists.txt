@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.10.2)
+
+set(CMAKE_C_COMPILER "clang")
+set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+project(Head-First-Design-Patterns-C++)
+
+message("Adding sub-directories start")
+add_subdirectory(Adapter)
+add_subdirectory(Command)
+add_subdirectory(Decorator)
+add_subdirectory(Facade)
+add_subdirectory(Factory)
+add_subdirectory(Observer)
+add_subdirectory(Singleton)
+add_subdirectory(State)
+add_subdirectory(TemplateMethod)
+message("Adding sub-directories end")
