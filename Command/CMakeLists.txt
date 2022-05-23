@@ -6,8 +6,7 @@ include_directories(include)
 
 add_executable(
             ${PROJECT_NAME}.out
-#            Command
-            
+
             src/NoCommand.cpp
             src/Light.cpp	
             src/LightOnCommand.cpp	

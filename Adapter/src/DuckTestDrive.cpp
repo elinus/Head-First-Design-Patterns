@@ -9,7 +9,7 @@ void testDuck(Duck *duck) {
   duck->fly();
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   auto *duck = new MallardDuck();
   auto *turkey = new WildTurkey();
   Duck *turkeyAdapter = new TurkeyAdapter(turkey);

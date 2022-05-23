@@ -6,6 +6,7 @@
 
 class WildTurkey : public Turkey {
 public:
+  virtual ~WildTurkey() {}
   void gobble() override;
   void fly() override;
 };

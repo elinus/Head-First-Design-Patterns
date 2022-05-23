@@ -12,7 +12,7 @@
 #include <Command/RemoteControl.h>
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
   auto *remoteControl = new RemoteControl();
   Light *light = new Light("Kitchen");
   Light *livingRoomLight = new Light("Livingroom");

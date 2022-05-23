@@ -14,5 +14,5 @@ std::unique_ptr<Pizza> PizzaStore::orderPizza(std::string type) {
   pizza->cut();
   pizza->box();
 
-  return std::move(pizza);
+  return nullptr; // TODO: Need to fix this
 }

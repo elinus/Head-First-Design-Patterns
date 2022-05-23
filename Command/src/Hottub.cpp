@@ -30,7 +30,7 @@ void Hottub::jetsOff() {
   }
 }
 
-void Hottub::setTemperture(int temperature) { this->temperature = temperature; }
+void Hottub::setTemperture(int temp) { this->temperature = temp; }
 
 void Hottub::heat() {
   temperature = 105;

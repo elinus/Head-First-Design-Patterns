@@ -8,7 +8,7 @@
 #include <Facade/TheaterLights.h>
 #include <Facade/Tuner.h>
 
-int main(int argc, char *argv[]) {
+int main() {
 
   Amplifier *amp = new Amplifier("Top-O-Line Amplifier");
   Tuner *tuner = new Tuner("Top-O-Line AM/FM Tuner", amp);

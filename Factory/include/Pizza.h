@@ -7,6 +7,7 @@
 
 class Pizza {
 public:
+  virtual ~Pizza() {}
   virtual std::string getName();
   virtual void prepare();
   virtual void bake();

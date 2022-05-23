@@ -13,7 +13,7 @@ public:
   void bubblesOff();
   void jetsOn();
   void jetsOff();
-  void setTemperture(int temperature);
+  void setTemperture(int temp);
   void heat();
   void cool();
 

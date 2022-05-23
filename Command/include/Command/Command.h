@@ -5,6 +5,7 @@
 
 class Command {
 public:
+  virtual ~Command() {}
   virtual void execute() = 0;
   virtual std::string toString() = 0;
 };

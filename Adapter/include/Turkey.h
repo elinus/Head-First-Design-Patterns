@@ -3,6 +3,7 @@
 
 class Turkey {
 public:
+  virtual ~Turkey() {}
   virtual void gobble() = 0;
   virtual void fly() = 0;
 };

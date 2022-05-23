@@ -6,6 +6,7 @@
 
 class NoCommand : public Command {
 public:
+  virtual ~NoCommand() {}
   void execute() override;
   std::string toString() override;
 };

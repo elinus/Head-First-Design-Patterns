@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.10.2)
 
 project(Decorator)
-add_compile_options(-Wall -Wnon-virtual-dtor)
 
 include_directories(include)
 

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 
-int main(int argc, char *argv[]) {
+int main() {
   Espresso beverage1;
   std::cout << beverage1.getDescription() << " $" << beverage1.cost()
             << std::endl;

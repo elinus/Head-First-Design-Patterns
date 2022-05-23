@@ -28,7 +28,7 @@ private:
   std::string description;
   Tuner *tuner;
   DvdPlayer *dvd;
-  CdPlayer *cd;
+  // CdPlayer *cd;
 };
 
 #endif /* __AMPLIFIER_H__ */
