@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.10.2)
+# Factory/CMakeLists.txt
 
-project(Factory)
-
-include_directories(include)
-
-add_executable(
-        ${PROJECT_NAME}.out
-        
+add_executable(Factory
         src/Pizza.cpp
         src/CheesePizza.cpp
         src/ClamPizza.cpp
@@ -17,4 +11,13 @@ add_executable(
         src/PizzaTestDrive.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Factory
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Factory PROPERTIES
+        OUTPUT_NAME "Factory.out"
+)
+
+message(STATUS "✅ Factory target added.")

@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.10.2)
+# Strategy/CMakeLists.txt
 
-project(Strategy)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-
+add_executable(Strategy
     src/FlyWithWings.cpp
     src/FlyNoWay.cpp
     src/FlyRocketPowered.cpp
@@ -23,4 +17,13 @@ add_executable(
     
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Strategy
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Strategy PROPERTIES
+        OUTPUT_NAME "Strategy.out"
+)
+
+message(STATUS "✅ Strategy target added.")

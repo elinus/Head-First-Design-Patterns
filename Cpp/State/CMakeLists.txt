@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.10.2)
+# State/CMakeLists.txt
 
-project(State)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-
+add_executable(State
     src/GumballMachine.cpp
     src/GumballMachineTestDrive.cpp
     src/HasQuarterState.cpp
@@ -15,4 +9,13 @@ add_executable(
     src/SoldState.cpp    
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(State
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(State PROPERTIES
+        OUTPUT_NAME "State.out"
+)
+
+message(STATUS "✅ State target added.")

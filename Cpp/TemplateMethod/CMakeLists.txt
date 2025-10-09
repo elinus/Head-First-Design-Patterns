@@ -1,16 +1,19 @@
-cmake_minimum_required(VERSION 3.10.2)
+# TemplateMethod/CMakeLists.txt
 
-project(TemplateMethod)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-
+add_executable(TemplateMethod
     src/CaffeineBeverage.cpp
     src/Coffee.cpp
     src/Tea.cpp
     src/BeverageTestDrive.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(TemplateMethod
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(TemplateMethod PROPERTIES
+        OUTPUT_NAME "TemplateMethod.out"
+)
+
+message(STATUS "✅ TemplateMethod target added.")

@@ -1,16 +1,19 @@
-cmake_minimum_required(VERSION 3.10.2)
+# Adapter/CMakeLists.txt
 
-project(Adapter)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-
+add_executable(Adapter
     src/MallardDuck.cpp
     src/WildTurkey.cpp
     src/TurkeyAdapter.cpp
     src/DuckTestDrive.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Adapter
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Adapter PROPERTIES
+        OUTPUT_NAME "Adapter.out"
+)
+
+message(STATUS "✅ Adapter target added.")

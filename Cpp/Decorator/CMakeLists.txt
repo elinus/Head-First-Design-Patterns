@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.10.2)
+# Command/CMakeLists.txt
 
-project(Decorator)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.outt
-
+add_executable(Decorator
     src/Espresso.cpp
     src/HouseBlend.cpp
     src/DarkRoast.cpp
@@ -18,4 +12,13 @@ add_executable(
     src/StarbuzzCoffee.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Decorator
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Decorator PROPERTIES
+        OUTPUT_NAME "Decorator.out"
+)
+
+message(STATUS "✅ Decorator target added.")

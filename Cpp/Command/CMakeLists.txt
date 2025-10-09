@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+# Command/CMakeLists.txt
 
-project(Command)
-
-include_directories(include)
-
-add_executable(
-            ${PROJECT_NAME}.out
-
+add_executable(Command
             src/NoCommand.cpp
             src/Light.cpp	
             src/LightOnCommand.cpp	
@@ -31,3 +25,13 @@ add_executable(
             src/RemoteLoader.cpp
 )
 
+target_include_directories(Command
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Command PROPERTIES
+        OUTPUT_NAME "Command.out"
+)
+
+message(STATUS "✅ Command target added.")

@@ -1,12 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+# Facade/CMakeLists.txt
 
-project(Facade)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-
+add_executable(Facade
     src/Amplifier.cpp	
     src/CdPlayer.cpp	
     src/DvdPlayer.cpp	
@@ -19,4 +13,13 @@ add_executable(
     src/HomeTheaterTestDrive.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Facade
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Facade PROPERTIES
+        OUTPUT_NAME "Facade.out"
+)
+
+message(STATUS "✅ Facade target added.")

@@ -1,14 +1,17 @@
-cmake_minimum_required(VERSION 3.10.2)
+# Singleton/CMakeLists.txt
 
-project(Singleton)
-
-include_directories(include)
-
-add_executable(
-    ${PROJECT_NAME}.out
-            
+add_executable(Singleton
     src/Singleton.cpp
     src/SingletonClient.cpp
 )
 
-message("${PROJECT_NAME} done.")
+target_include_directories(Singleton
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(Singleton PROPERTIES
+        OUTPUT_NAME "Singleton.out"
+)
+
+message(STATUS "✅ Singleton target added.")
