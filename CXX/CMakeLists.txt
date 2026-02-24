@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "" FORCE)
+endif()
+
 project(
         HeadFirstDesignPatternsCPP
         VERSION 1.0
@@ -18,10 +22,10 @@ add_compile_options(
     -Wall
     #-Werror # treat all warning as errors
     -Wextra # reasonable and standard
-    -Wunused # warn on anything being unused
+#    -Wunused # warn on anything being unused
     -Wpedantic # warn if non-standard C++ is used
     #-Wshadow # warn the user if a variable declaration shadows one form a parent context
-    -Wnon-virtual-dtor # warn the user if a class with virtual 
+#    -Wnon-virtual-dtor # warn the user if a class with virtual
     # functions has a non-virtual destructor. This
     # helps catch hard to track down memory errors
     -Wold-style-cast # warn for c-style casts
