@@ -1,26 +1,33 @@
-#include <ForecastDisplay.h>
+#include "ForecastDisplay.h"
 
-ForecastDisplay::ForecastDisplay(Subject &weatherData)
-    : weatherData(weatherData), currentPressure(29.92f), lastPressure(0.0f) {
-  weatherData.registerObserver(this);
+#include <iostream>
+
+ForecastDisplay::ForecastDisplay(Subject& subject)
+    : subject_(subject) {
+  subject_.registerObserver(this);
 }
 
-ForecastDisplay::~ForecastDisplay() { weatherData.removeObserver(this); }
+ForecastDisplay::~ForecastDisplay() {
+  subject_.removeObserver(this);
+}
 
-void ForecastDisplay::update(float temperature, float humidity,
-                             float pressure) {
-  lastPressure = currentPressure;
-  currentPressure = pressure;
+
+void ForecastDisplay::update(const Measurement& m) {
+  lastPressure_    = currentPressure_;
+  currentPressure_ = m.pressure;
   display();
 }
 
 void ForecastDisplay::display() const {
-  std::cout << "Forecast: ";
-  if (currentPressure > lastPressure) {
-    std::cout << "Improving weather on the way!\n";
-  } else if (currentPressure == lastPressure) {
-    std::cout << "More of the same\n";
-  } else if (currentPressure < lastPressure) {
-    std::cout << "Watchout for cooler, rainy weather\n";
+  std::cout << "[Forecast] ";
+  if (!lastPressure_) {
+    std::cout << "Awaiting second reading.\n";
+    return;
   }
+
+  if (currentPressure_ > *lastPressure_)
+    std::cout << "Improving weather on the way!\n";
+  else if (currentPressure_ < *lastPressure_)
+    std::cout << "Watch out for cooler, rainy weather.\n";
+  else std::cout << "More of the same.\n";
 }

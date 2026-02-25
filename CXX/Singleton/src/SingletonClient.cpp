@@ -1,7 +1,7 @@
 #include "Singleton.h"
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
   // Register a callback before first access
     Singleton::getInstance().setAccessCallback([](int count) {
         std::cout << "[callback] Access #" << count << "\n";

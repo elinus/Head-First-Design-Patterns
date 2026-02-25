@@ -1,21 +1,23 @@
-#include <CurrentConditionsDisplay.h>
+#include "CurrentConditionsDisplay.h"
+#include <iostream>
+#include <iomanip>
 
-CurrentConditionsDisplay::CurrentConditionsDisplay(Subject &weatherData)
-    : weatherData(weatherData), temperature(0.0f), humidity(0.0f) {
-  weatherData.registerObserver(this);
+CurrentConditionsDisplay::CurrentConditionsDisplay(Subject& subject)
+    : subject_(subject) {
+    subject_.registerObserver(this);
 }
 
 CurrentConditionsDisplay::~CurrentConditionsDisplay() {
-  weatherData.removeObserver(this);
+    subject_.removeObserver(this);
 }
 
-void CurrentConditionsDisplay::update(float temp, float humid, float press) {
-  this->temperature = temp;
-  this->humidity = humid;
-  display();
+void CurrentConditionsDisplay::update(const Measurement& m) {
+    current_ = m;
+    display();
 }
 
 void CurrentConditionsDisplay::display() const {
-  std::cout << std::setprecision(2) << "Current conditions: " << temperature
-            << "F degree and " << humidity << "\% humidity\n";
+  std::cout << std::fixed << std::setprecision(2)
+    << "[Current]  " << current_.temperature << "F  |  "
+    << current_.humidity << "% humidity\n";
 }

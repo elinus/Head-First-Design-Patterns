@@ -3,7 +3,7 @@
 #include <SimplePizzaFactory.h>
 #include <memory>
 
-int main(int argc, char *argv[]) {
+int main() {
   std::unique_ptr<SimplePizzaFactory> factory(new SimplePizzaFactory());
   std::unique_ptr<PizzaStore> store(new PizzaStore(std::move(factory)));
 

@@ -1,29 +1,38 @@
-#include <StatisticsDisplay.h>
+#include "StatisticsDisplay.h"
 
-StatisticsDisplay::StatisticsDisplay(Subject &weatherData)
-    : weatherData(weatherData), maxTemp(0.0f), minTemp(0.0f), tempSum(0),
-      numReadings(0) {
-  weatherData.registerObserver(this);
+#include <iomanip>
+#include <iostream>
+
+StatisticsDisplay::StatisticsDisplay(Subject& subject)
+    : subject_(subject) {
+  subject_.registerObserver(this);
 }
 
-StatisticsDisplay::~StatisticsDisplay() { weatherData.removeObserver(this); }
+StatisticsDisplay::~StatisticsDisplay() {
+  subject_.removeObserver(this);
+}
 
-void StatisticsDisplay::update(float temperature, float humidity,
-                               float pressure) {
-  tempSum += temperature;
-  numReadings++;
-  if (temperature > maxTemp) {
-    maxTemp = temperature;
-  }
-  if (temperature < minTemp) {
-    minTemp = temperature;
-  }
+void StatisticsDisplay::update(const Measurement& m) {
+  const float t = m.temperature;
+
+  tempSum_ += t;
+  ++numReadings_;
+
+  if (!maxTemp_ || t > *maxTemp_) maxTemp_ = t;
+  if (!minTemp_ || t < *minTemp_) minTemp_ = t;
 
   display();
 }
 
 void StatisticsDisplay::display() const {
-  std::cout << std::setprecision(5)
-            << "Avg/MAx/Min temperature = " << (tempSum / numReadings) << "/"
-            << maxTemp << "/" << minTemp << "\n";
+  if (numReadings_ == 0) {
+    std::cout << "[Statistics] No readings yet.\n";
+    return;
+  }
+  std::cout << std::fixed << std::setprecision(2)
+            << "[Statistics] Avg/Max/Min = "
+            << (tempSum_ / numReadings_) << " / "
+            << *maxTemp_ << " / "
+            << *minTemp_ << " F\n";
 }
+

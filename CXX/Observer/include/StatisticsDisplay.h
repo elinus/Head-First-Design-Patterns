@@ -1,26 +1,24 @@
-#ifndef __STATISTICS_DISPLAY_H__
-#define __STATISTICS_DISPLAY_H__
+#pragma once
 
-#include <DisplayElement.h>
-#include <Observer.h>
-#include <Subject.h>
+#include "DisplayElement.h"
+#include "Observer.h"
+#include "Subject.h"
 
-#include <iomanip>
-#include <iostream>
+#include <optional>
 
 class StatisticsDisplay : public Observer, public DisplayElement {
 public:
-  explicit StatisticsDisplay(Subject &weatherData);
-  ~StatisticsDisplay();
-  void update(float temperature, float humidity, float pressure) override;
+  explicit StatisticsDisplay(Subject& subject);
+  ~StatisticsDisplay() override;
+
+  void update(const Measurement& m) override;
   void display() const override;
 
 private:
-  float maxTemp = 0.0f;
-  float minTemp = 200.0f;
-  float tempSum = 0.0f;
-  int numReadings;
-  Subject &weatherData;
+  Subject& subject_;
+  std::optional<float> maxTemp_;
+  std::optional<float> minTemp_;
+  float                tempSum_     = 0.0f;
+  int                  numReadings_ = 0;
 };
 
-#endif

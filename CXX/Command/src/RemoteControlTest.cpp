@@ -11,7 +11,7 @@
 #include <Command/LivingroomLightOnCommand.h>
 #include <Command/SimpleRemoteControl.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   SimpleRemoteControl *remote = new SimpleRemoteControl();
   Light *light = new Light("Kitchen");
   GarageDoor *garageDoor = new GarageDoor("");

@@ -1,7 +1,7 @@
 #include <GumballMachine.h>
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
   auto *gumballMachine = new GumballMachine(2);
 
   std::cout << gumballMachine->toString() << std::endl;

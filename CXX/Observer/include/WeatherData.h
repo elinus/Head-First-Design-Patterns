@@ -1,28 +1,24 @@
-#ifndef __WEATHER_DATA_H__
-#define __WEATHER_DATA_H__
+#pragma once
 
-#include <Subject.h>
-#include <algorithm>
+#include "Measurement.h"
+#include "Subject.h"
+
 #include <vector>
 
 class WeatherData : public Subject {
 public:
-  WeatherData() = default;
-  virtual ~WeatherData() = default;
-  void registerObserver(Observer *o) override;
-  void removeObserver(Observer *o) override;
-  void notifyObservers() override;
-  void measurementsChanged();
-  void setMeasurements(float temperature, float humidity, float pressure);
-  float getTemperature() { return temperature; }
-  float getHumidity() { return humidity; }
-  float getPressure() { return pressure; }
+  void registerObserver(Observer* o) override;
+  void removeObserver(Observer* o)   override;
+  void notifyObservers()             override;
+
+  void setMeasurements(const Measurement& m);
+
+  [[nodiscard]] float getTemperature() const { return current_.temperature; }
+  [[nodiscard]] float getHumidity()    const { return current_.humidity; }
+  [[nodiscard]] float getPressure()    const { return current_.pressure; }
 
 private:
-  std::vector<Observer *> observers;
-  float temperature;
-  float humidity;
-  float pressure;
+  std::vector<Observer*> observers_;
+  Measurement            current_;
 };
 
-#endif

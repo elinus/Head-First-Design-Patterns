@@ -1,23 +1,21 @@
-#ifndef __FORECAST_DISPLAY_H__
-#define __FORECAST_DISPLAY_H__
+#pragma once
 
-#include <DisplayElement.h>
-#include <Observer.h>
-#include <Subject.h>
+#include "DisplayElement.h"
+#include "Observer.h"
+#include "Subject.h"
 
-#include <iostream>
+#include <optional>
 
 class ForecastDisplay : public Observer, public DisplayElement {
 public:
-  explicit ForecastDisplay(Subject &weatherData);
-  ~ForecastDisplay();
-  void update(float temperature, float humidity, float pressure) override;
+  explicit ForecastDisplay(Subject& subject);
+  ~ForecastDisplay() override;
+
+  void update(const Measurement& m) override;
   void display() const override;
 
 private:
-  float currentPressure = 29.92f;
-  float lastPressure;
-  Subject &weatherData;
+  Subject&             subject_;
+  float                currentPressure_ = 29.92f;
+  std::optional<float> lastPressure_;
 };
-
-#endif

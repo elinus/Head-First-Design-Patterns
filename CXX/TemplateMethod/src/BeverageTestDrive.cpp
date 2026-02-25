@@ -1,7 +1,7 @@
 #include <Coffee.h>
 #include <Tea.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   auto *tea = new Tea();
   auto *coffee = new Coffee();
 

@@ -1,10 +1,9 @@
-#ifndef __OBSERVER_H__
-#define __OBSERVER_H__
+#pragma once
+
+#include "Measurement.h"
 
 class Observer {
 public:
   virtual ~Observer() = default;
-  virtual void update(float temp, float humidity, float pressure) = 0;
+  virtual void update(const Measurement& m) = 0;
 };
-
-#endif

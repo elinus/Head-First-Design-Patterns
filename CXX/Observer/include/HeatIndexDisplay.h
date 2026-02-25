@@ -1,23 +1,18 @@
-#ifndef __HEAT_INDEX_DISPLAY_H__
-#define __HEAT_INDEX_DISPLAY_H__
+#pragma once
 
-#include <DisplayElement.h>
-#include <Observer.h>
-#include <Subject.h>
-
-#include <iostream>
+#include "DisplayElement.h"
+#include "Observer.h"
+#include "Subject.h"
 
 class HeatIndexDisplay : public Observer, public DisplayElement {
 public:
-  explicit HeatIndexDisplay(Subject &weatherData);
-  ~HeatIndexDisplay();
-  void update(float temperature, float humidity, float pressure) override;
+  explicit HeatIndexDisplay(Subject& subject);
+  ~HeatIndexDisplay() override;
+
+  void update(const Measurement& m) override;
   void display() const override;
 
 private:
-  float computeHeatIndex(float t, float rh);
-  float heatIndex = 0.0f;
-  Subject &weatherData;
+  Subject& subject_;
+  float    heatIndex_ = 0.0f;
 };
-
-#endif
