@@ -1,10 +1,10 @@
 #include <PepperoniPizza.h>
 
 PepperoniPizza::PepperoniPizza() {
-  name = "Pepperoni Pizza";
-  dough = "Crust";
-  sauce = "Marinara sauce";
-  toppings.emplace_back("Sliced Pepperoni");
-  toppings.emplace_back("Sliced Onion");
-  toppings.emplace_back("Grated parmesan cheese");
+  name_ = "Pepperoni Pizza";
+  dough_ = "Crust";
+  sauce_ = "Marinara sauce";
+  toppings_.emplace_back("Sliced Pepperoni");
+  toppings_.emplace_back("Sliced Onion");
+  toppings_.emplace_back("Grated parmesan cheese");
 }

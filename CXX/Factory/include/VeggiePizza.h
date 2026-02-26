@@ -1,11 +1,8 @@
-#ifndef __VEGGIE_PIZZA_H__
-#define __VEGGIE_PIZZA_H__
+#pragma once
 
-#include <Pizza.h>
+#include "Pizza.h"
 
 class VeggiePizza : public Pizza {
 public:
   VeggiePizza();
 };
-
-#endif // !__VEGGIE_PIZZA_H__

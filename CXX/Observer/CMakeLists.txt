@@ -7,7 +7,6 @@ add_executable(Observer
     src/ForecastDisplay.cpp
     src/HeatIndexDisplay.cpp
     src/WeatherStation.cpp
-        include/Measurement.h
 )
 
 target_include_directories(Observer

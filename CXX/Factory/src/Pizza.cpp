@@ -1,26 +1,26 @@
-#include <Pizza.h>
+#include "Pizza.h"
 
-std::string Pizza::getName() { return name; }
+#include <iostream>
+#include <sstream>
 
-void Pizza::prepare() { std::cout << "Preparing " << name << std::endl; }
+std::string Pizza::getName() { return name_; }
 
-void Pizza::bake() { std::cout << "Baking " << name << std::endl; }
+void Pizza::logAction(std::string_view action) const {
+    std::cout << action << " " << name_ << "\n";
+}
 
-void Pizza::cut() { std::cout << "Cutting " << name << std::endl; }
+void Pizza::prepare() { logAction("Preparing"); }
+void Pizza::bake()    { logAction("Baking");    }
+void Pizza::cut()     { logAction("Cutting");   }
+void Pizza::box()     { logAction("Boxing");    }
 
-void Pizza::box() { std::cout << "Boxing " << name << std::endl; }
-
-std::string Pizza::toString() {
-  std::string display;
-  display.append("---- ");
-  display.append(name);
-  display.append(" ----\n");
-  display.append(dough);
-  display.append("\n");
-  display.append(sauce);
-  display.append("\n");
-  for (std::string topping : toppings) {
-    display.append(topping + "\n");
+std::string Pizza::toString() const {
+  std::ostringstream oss;
+  oss << "---- " << name_ << " ----\n"
+      << dough_ << "\n"
+      << sauce_ << "\n";
+  for (const auto& topping : toppings_) {
+    oss << topping << "\n";
   }
-  return display;
+  return oss.str();
 }

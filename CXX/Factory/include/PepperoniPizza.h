@@ -1,11 +1,8 @@
-#ifndef __PEPPERONI_PIZZA_H__
-#define __PEPPERONI_PIZZA_H__
+#pragma once
 
-#include <Pizza.h>
+#include "Pizza.h"
 
 class PepperoniPizza : public Pizza {
 public:
   PepperoniPizza();
 };
-
-#endif // !__PEPPERONI_PIZZA_H__

@@ -1,18 +1,15 @@
-#ifndef __PIZZA_STORE_H__
-#define __PIZZA_STORE_H__
+#pragma once
 
-#include <Pizza.h>
-#include <SimplePizzaFactory.h>
+#include "Pizza.h"
+#include "SimplePizzaFactory.h"
 #include <memory>
 #include <string>
 
 class PizzaStore {
-private:
-  std::unique_ptr<SimplePizzaFactory> factory;
-
 public:
-  PizzaStore(std::unique_ptr<SimplePizzaFactory> simplePizzaFactory);
+  explicit PizzaStore(std::unique_ptr<SimplePizzaFactory> simplePizzaFactory);
   std::unique_ptr<Pizza> orderPizza(std::string type);
+private:
+  std::unique_ptr<SimplePizzaFactory> factory_;
 };
 
-#endif // !__PIZZA_STORE_H__

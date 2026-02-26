@@ -1,9 +1,9 @@
 #include <ClamPizza.h>
 
 ClamPizza::ClamPizza() {
-  name = "Clam Pizza";
-  dough = "Thin crust";
-  sauce = "White garlic sauce";
-  toppings.emplace_back("Clams");
-  toppings.emplace_back("Grated parmesan cheese");
+  name_ = "Clam Pizza";
+  dough_ = "Thin crust";
+  sauce_ = "White garlic sauce";
+  toppings_.emplace_back("Clams");
+  toppings_.emplace_back("Grated parmesan cheese");
 }

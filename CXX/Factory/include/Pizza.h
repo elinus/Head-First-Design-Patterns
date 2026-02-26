@@ -1,25 +1,23 @@
-#ifndef __PIZZA_H__
-#define __PIZZA_H__
+#pragma once
 
-#include <iostream>
 #include <string>
 #include <vector>
 
 class Pizza {
 public:
-  virtual ~Pizza() {}
+  virtual ~Pizza() = default;
   virtual std::string getName();
   virtual void prepare();
   virtual void bake();
   virtual void cut();
   virtual void box();
-  std::string toString();
+  [[nodiscard]] std::string toString() const;
 
 protected:
-  std::string name;
-  std::string dough;
-  std::string sauce;
-  std::vector<std::string> toppings;
-};
+  std::string name_;
+  std::string dough_;
+  std::string sauce_;
+  std::vector<std::string> toppings_;
 
-#endif // !__PIZZA_H__
+  void logAction(std::string_view action) const;
+};

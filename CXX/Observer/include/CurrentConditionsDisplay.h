@@ -5,9 +5,6 @@
 #include "Subject.h"
 #include "Measurement.h"
 
-#include <string>
-#include <string_view>
-
 class CurrentConditionsDisplay : public Observer, public DisplayElement {
 public:
   explicit CurrentConditionsDisplay(Subject& subject);

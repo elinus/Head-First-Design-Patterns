@@ -1,18 +1,16 @@
 #include <PizzaStore.h>
 
 PizzaStore::PizzaStore(std::unique_ptr<SimplePizzaFactory> factory) {
-  this->factory = std::move(factory);
+  this->factory_ = std::move(factory);
 }
 
 std::unique_ptr<Pizza> PizzaStore::orderPizza(std::string type) {
-  std::unique_ptr<Pizza> pizza;
-
-  pizza = factory->createPizza(type);
+  std::unique_ptr<Pizza> pizza = factory_->createPizza(type);
 
   pizza->prepare();
   pizza->bake();
   pizza->cut();
   pizza->box();
 
-  return nullptr; // TODO: Need to fix this
+  return pizza;
 }

@@ -1,11 +1,12 @@
-#include <Pizza.h>
-#include <PizzaStore.h>
-#include <SimplePizzaFactory.h>
+#include "Pizza.h"
+#include "PizzaStore.h"
+#include "SimplePizzaFactory.h"
+#include <iostream>
 #include <memory>
 
 int main() {
-  std::unique_ptr<SimplePizzaFactory> factory(new SimplePizzaFactory());
-  std::unique_ptr<PizzaStore> store(new PizzaStore(std::move(factory)));
+  auto factory = std::make_unique<SimplePizzaFactory>();
+  const auto store(std::make_unique<PizzaStore>(std::move(factory)));
 
   std::unique_ptr<Pizza> pizza = store->orderPizza("cheese");
   std::cout << "We ordered a " << pizza->getName() << "\n";
