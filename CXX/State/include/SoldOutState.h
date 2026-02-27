@@ -1,24 +1,23 @@
-#ifndef __SOLD_OUT_STATE_H__
-#define __SOLD_OUT_STATE_H__
+#pragma once
 
-#include <GumballMachine.h>
-#include <State.h>
-#include <iostream>
-#include <string>
+#include "State.h"
+
+#include <string_view>
+
+class GumballMachine;
 
 class SoldOutState : public State {
 public:
-  SoldOutState(GumballMachine *gumballMachine);
-  // Inherited via State
+  explicit SoldOutState(GumballMachine& gumballMachine);
+
   void insertQuarter() override;
-  void ejectQuarter() override;
-  void turnCrank() override;
-  void despense() override;
-  void refill() override;
-  std::string toString() override;
+  void ejectQuarter()  override;
+  void turnCrank()     override;
+  void dispense()      override;
+  void refill()        override;
+
+  std::string_view toString() const override;
 
 private:
-  GumballMachine *gumballMachine;
+  GumballMachine& gumballMachine_;
 };
-
-#endif // !__SOLD_OUT_STATE_H__

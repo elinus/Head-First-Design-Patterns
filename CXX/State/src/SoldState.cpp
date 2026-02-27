@@ -1,31 +1,36 @@
-#include <SoldState.h>
+#include "SoldState.h"
+#include "GumballMachine.h"
 
-SoldState::SoldState(GumballMachine *gumballMachine) {
-  this->gumballMachine = gumballMachine;
-}
+#include <iostream>
+
+SoldState::SoldState(GumballMachine& gumballMachine)
+    : gumballMachine_(gumballMachine)
+{}
 
 void SoldState::insertQuarter() {
-  std::cout << "Please wait, we're already giving you a gumball" << std::endl;
+  std::cout << "Please wait, we're already giving you a gumball\n";
 }
 
 void SoldState::ejectQuarter() {
-  std::cout << "Sorry, you already turned the crank" << std::endl;
+  std::cout << "Sorry, you already turned the crank\n";
 }
 
 void SoldState::turnCrank() {
-  std::cout << "Turning twice doesn't get you another gumball!" << std::endl;
+  std::cout << "Turning twice doesn't get you another gumball!\n";
 }
 
-void SoldState::despense() {
-  gumballMachine->releaseBall();
-  if (gumballMachine->getCount() > 0) {
-    gumballMachine->setState(gumballMachine->getNoQuarterState());
+void SoldState::dispense() {
+  gumballMachine_.releaseBall();
+  if (gumballMachine_.getCount() > 0) {
+    gumballMachine_.setState(gumballMachine_.getNoQuarterState());
   } else {
-    std::cout << "Oops, out of gumballs!" << std::endl;
-    gumballMachine->setState(gumballMachine->getSoldOutState());
+    std::cout << "Oops, out of gumballs!\n";
+    gumballMachine_.setState(gumballMachine_.getSoldOutState());
   }
 }
 
 void SoldState::refill() {}
 
-std::string SoldState::toString() { return "dispensing a gumball"; }
+std::string_view SoldState::toString() const {
+  return "dispensing a gumball";
+}

@@ -1,73 +1,63 @@
-#include <GumballMachine.h>
-#include <HasQuarterState.h>
-#include <NoQuarterState.h>
-#include <SoldOutState.h>
-#include <SoldState.h>
-#include <State.h>
+#include "GumballMachine.h"
+#include "HasQuarterState.h"
+#include "NoQuarterState.h"
+#include "SoldOutState.h"
+#include "SoldState.h"
+#include "State.h"
 
-GumballMachine::GumballMachine(int numberGumballs) {
-  soldOutState = new SoldOutState(this);
-  noQuarterState = new NoQuarterState(this);
-  hasQuarterState = new HasQuarterState(this);
-  soldState = new SoldState(this);
-  this->count = numberGumballs;
-  if (numberGumballs > 0) {
-    state = noQuarterState;
-  } else {
-    state = soldOutState;
-  }
-}
+#include <iostream>
 
-void GumballMachine::insertQuarter() { state->insertQuarter(); }
+GumballMachine::GumballMachine(int numberGumballs)
+    : soldOutState_(std::make_unique<SoldOutState>(*this))
+    , noQuarterState_(std::make_unique<NoQuarterState>(*this))
+    , hasQuarterState_(std::make_unique<HasQuarterState>(*this))
+    , soldState_(std::make_unique<SoldState>(*this))
+    , currentState_(numberGumballs > 0 ? *noQuarterState_ : *soldOutState_)
+    , count_(numberGumballs)
+{}
 
-void GumballMachine::ejectQuarter() { state->ejectQuarter(); }
+void GumballMachine::insertQuarter() const { currentState_.get().insertQuarter(); }
 
-void GumballMachine::turnCrank() {
-  state->turnCrank();
-  state->despense();
+void GumballMachine::ejectQuarter() const { currentState_.get().ejectQuarter(); }
+
+void GumballMachine::turnCrank() const
+{
+  currentState_.get().turnCrank();
+  currentState_.get().dispense();
 }
 
 void GumballMachine::releaseBall() {
-  std::cout << "A gumball comes rolling out the slot..." << std::endl;
-  if (count != 0) {
-    count = count - 1;
+  std::cout << "A gumball comes rolling out the slot...\n";
+  if (count_ > 0) {
+    --count_;
   }
 }
 
-int GumballMachine::getCount() { return count; }
+int GumballMachine::getCount() const { return count_; }
 
-void GumballMachine::refill(int count) {
-  this->count += count;
-  std::cout << "The gumball machine was just refilled; it's new count is: "
-            << this->count << std::endl;
-  state->refill();
+void GumballMachine::refill(const int count) {
+  count_ += count;
+  std::cout << "The gumball machine was just refilled; its new count is: "
+            << count_ << "\n";
+  currentState_.get().refill();
 }
 
-void GumballMachine::setState(State *state) { this->state = state; }
+void GumballMachine::setState(State& newState) {
+  currentState_ = newState;
+}
 
-State *GumballMachine::getState() { return state; }
+State& GumballMachine::getState()           const { return currentState_.get(); }
+State& GumballMachine::getSoldOutState()    const { return *soldOutState_;      }
+State& GumballMachine::getNoQuarterState()  const { return *noQuarterState_;    }
+State& GumballMachine::getHasQuarterState() const { return *hasQuarterState_;   }
+State& GumballMachine::getSoldState()       const { return *soldState_;         }
 
-State *GumballMachine::getSoldOutState() { return soldOutState; }
-
-State *GumballMachine::getNoQuarterState() { return noQuarterState; }
-
-State *GumballMachine::getHasQuarterState() { return hasQuarterState; }
-
-State *GumballMachine::getSoldState() { return soldState; }
-
-std::string GumballMachine::toString() {
-  std::string result;
-  result.append("\nMighty Gumball, Inc.");
-  result.append("\nC++-enabled Standing Gumball Model #2019");
-  result.append("\nInventory: ");
-  result.append(std::to_string(this->count));
-  result.append(" gumball");
-  if (this->count != 1) {
-    result.append("s");
-  }
-  result.append("\n");
-  result.append("Machine is ");
-  result.append(state->toString());
-  result.append("name");
-  return result;
+std::ostream& operator<<(std::ostream& os, const GumballMachine& gm) {
+  os << "\nMighty Gumball, Inc."
+     << "\nC++ - enabled Standing Gumball Model #2019"
+     << "\nInventory: " << gm.count_ << " gumball"
+     << (gm.count_ != 1 ? "s" : "")
+     << "\nMachine is " << gm.currentState_.get().toString()
+     << "\n";
+  return os;
 }

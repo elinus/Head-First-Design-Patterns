@@ -1,25 +1,26 @@
-#include <GumballMachine.h>
+#include "GumballMachine.h"
+
 #include <iostream>
 
 int main() {
-  auto *gumballMachine = new GumballMachine(2);
+  GumballMachine gumballMachine(2);
 
-  std::cout << gumballMachine->toString() << std::endl;
+  std::cout << gumballMachine;
 
-  gumballMachine->insertQuarter();
-  gumballMachine->turnCrank();
+  gumballMachine.insertQuarter();
+  gumballMachine.turnCrank();
 
-  std::cout << gumballMachine->toString() << std::endl;
+  std::cout << gumballMachine;
 
-  gumballMachine->insertQuarter();
-  gumballMachine->turnCrank();
-  gumballMachine->insertQuarter();
-  gumballMachine->turnCrank();
-  gumballMachine->refill(5);
-  gumballMachine->insertQuarter();
-  gumballMachine->turnCrank();
+  gumballMachine.insertQuarter();
+  gumballMachine.turnCrank();
+  gumballMachine.insertQuarter();
+  gumballMachine.turnCrank();
+  gumballMachine.refill(5);
+  gumballMachine.insertQuarter();
+  gumballMachine.turnCrank();
 
-  std::cout << gumballMachine->toString() << std::endl;
+  std::cout << gumballMachine;
 
   return 0;
 }

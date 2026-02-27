@@ -1,8 +1,6 @@
-#ifndef __COFFEE_H__
-#define __COFFEE_H__
+#pragma once
 
-#include <CaffeineBeverage.h>
-#include <string>
+#include "CaffeineBeverage.h"
 
 class Coffee : public CaffeineBeverage {
 public:
@@ -10,8 +8,5 @@ public:
   void addCondiments() override;
   bool customerWantsCondiments() override;
 
-private:
-  std::string getUserInput();
 };
 
-#endif

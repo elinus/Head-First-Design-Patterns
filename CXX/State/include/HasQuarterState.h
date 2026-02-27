@@ -1,24 +1,23 @@
-#ifndef __HAS_QUARTER_STATE_H__
-#define __HAS_QUARTER_STATE_H__
+#pragma once
 
-#include <GumballMachine.h>
-#include <State.h>
-#include <iostream>
-#include <string>
+#include "State.h"
+
+#include <string_view>
+
+class GumballMachine;
 
 class HasQuarterState : public State {
 public:
-  HasQuarterState(GumballMachine *gumballMachine);
-  // Inherited via State
+  explicit HasQuarterState(GumballMachine& gumballMachine);
+
   void insertQuarter() override;
-  void ejectQuarter() override;
-  void turnCrank() override;
-  void despense() override;
-  void refill() override;
-  std::string toString() override;
+  void ejectQuarter()  override;
+  void turnCrank()     override;
+  void dispense()      override;
+  void refill()        override;
+
+  std::string_view toString() const override;
 
 private:
-  GumballMachine *gumballMachine;
+  GumballMachine& gumballMachine_;
 };
-
-#endif // !__HAS_QUARTER_STATE_H__
